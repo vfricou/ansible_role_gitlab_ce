@@ -1,0 +1,8 @@
+---
+- name: 'import centos tasks'
+  ansible.builtin.import_tasks: centos/main.yml
+  when: ansible_facts['distribution'] == 'CentOS' and host_type == 'forge'
+
+- name: 'import debian tasks'
+  ansible.builtin.import_tasks: debian/main.yml
+  when: ansible_facts['distribution'] == 'Debian' and host_type == 'forge'

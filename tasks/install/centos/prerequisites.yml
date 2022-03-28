@@ -1,0 +1,4 @@
+---
+- name: 'install | centos | prerequisites | install required packages'
+  ansible.builtin.yum:
+    name: "{{ centos_prerequisites_packages }}"

@@ -1,0 +1,32 @@
+---
+- name: "install | centos | gitlab | deploy yum repository"
+  ansible.builtin.yum_repository:
+    name: 'gitlab-ce'
+    description: 'GitLab CE officiel package repository'
+    baseurl: 'https://packages.gitlab.com/gitlab/gitlab-ce/el/$releasever/$basearch'
+    repo_gpgcheck: 'yes'
+    gpgcheck: 'yes'
+    enabled: 'yes'
+    sslverify: 'yes'
+    sslcacert: '/etc/pki/tls/certs/ca-bundle.crt'
+    metadata_expire: '300'
+    gpgkey:
+      - https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey
+      - https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey/gitlab-gitlab-ce-3D645A26AB9FBD22.pub.gpg
+  tags:
+    - install
+    - update
+
+- name: "install | centos | gitlab | install gitlab ce packages"
+  ansible.builtin.yum:
+    name: '{{ gitlab_packages }}'
+    state: present
+  tags:
+    - install
+
+- name: "install | centos | gitlab | update gitlab ce packages"  # noqa package-latest
+  ansible.builtin.yum:
+    name: '{{ gitlab_packages }}'
+    state: latest
+  tags:
+    - update

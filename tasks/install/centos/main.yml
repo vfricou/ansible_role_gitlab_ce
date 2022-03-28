@@ -1,0 +1,8 @@
+---
+- name: 'import package requirements installation'
+  ansible.builtin.import_tasks: prerequisites.yml
+  tags:
+    - install
+
+- name: 'import gitlab installation tasks'
+  ansible.builtin.import_tasks: gitlab.yml

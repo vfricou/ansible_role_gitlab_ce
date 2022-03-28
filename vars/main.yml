@@ -1,0 +1,15 @@
+---
+# Supported OS definition
+supported_platforms:
+  - name: Debian
+    versions:
+      - 10
+  - name: CentOS
+    versions:
+      - 7
+
+# Role constants
+gitlab_packages:
+  - gitlab-ce
+centos_prerequisites_packages:
+  - pygpgme
