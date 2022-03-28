@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  role_name: "gitlab_ce"
+  author: "Vincent FRICOU"
+  namespace: "vfricou"
+  description: 'Install, configure and manage GitLab CE'
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Debian
+      versions:
+        - buster
+dependencies: []
