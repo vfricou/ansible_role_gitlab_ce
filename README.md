@@ -23,6 +23,11 @@ Runners can be deployed on separate servers.
 
 # Requirements
 
+## Ansible Galaxy requirements
+
+Collections :
+- `community.crypto`
+
 ## On target OS
 
 Python3 est requis sur le système d’exploitation cible pour l’utilisation de ce role.
