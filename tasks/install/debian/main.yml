@@ -1,0 +1,20 @@
+---
+- name: 'install | debian | install gitlab ce packages'
+  ansible.builtin.apt:
+    update_cache: yes
+    dpkg_options: 'force-confold'
+    name: '{{ gitlab_packages }}'
+    state: present
+    install_recommends: no
+  tags:
+    - install
+
+- name: 'install | debian | update gitlab ce packages'  # noqa package-latest
+  ansible.builtin.apt:
+    update_cache: yes
+    dpkg_options: 'force-confold'
+    name: '{{ gitlab_packages }}'
+    state: latest
+    install_recommends: no
+  tags:
+    - update

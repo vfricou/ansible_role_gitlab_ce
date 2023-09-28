@@ -1,0 +1,28 @@
+---
+- name: 'configure | test if dhparam key exist'
+  ansible.builtin.stat:
+    path: "{{ vlt_gitlab_nginx['dhparams'] }}"
+  register: dhparamfile
+
+- name: 'configure | generate diffie hellman file'
+  community.crypto.openssl_dhparam:
+    path: "{{ vlt_gitlab_nginx['dhparams'] }}"
+    group: root
+    state: present
+    mode: 0644
+    owner: root
+    size: 4096
+  when: not dhparamfile.stat.exists
+
+- name: 'configure | configure gitlab'
+  ansible.builtin.template:
+    dest: /etc/gitlab/gitlab.rb
+    src: etc-gitlab.rb.j2
+    owner: root
+    group: root
+    mode: 0600
+    backup: yes
+  notify: reconfigure gitlab
+
+- name: 'configure | run notified handlers now'
+  ansible.builtin.meta: flush_handlers
